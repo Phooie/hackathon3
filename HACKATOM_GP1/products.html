@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Catalog | NuclearSeeding Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        .bg-nuclear-green {
+            background-color: #28a745;
+        }
+
+        .text-nuclear-green {
+            color: #28a745;
+        }
+
+        /* Style for sticky filter sidebar (desktop view) */
+        @media (min-width: 1024px) {
+            .sticky-filters {
+                top: 5rem;
+                /* Space below the header */
+                max-height: calc(100vh - 5rem);
+                /* Prevents filter overflow */
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+    <header class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="home.html" class="flex-shrink-0 flex items-center space-x-2">
+                    <img src="logo.jpg" alt="Logo" class="h-10 w-10 object-contain">
+                    <span class="text-3xl font-extrabold text-gray-900">Future Harvest</span>
+                </a>
+
+                <div class="hidden lg:block flex-grow max-w-lg mx-10">
+                    <input type="search" placeholder="Search Seeds, Fertilizer, or Yield Data..."
+                        class="w-full py-2 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuclear-green">
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-nuclear-green transition duration-150">
+                        <i class="bi bi-person text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-nuclear-green transition duration-150 relative">
+                        <i class="bi bi-bag text-2xl"></i>
+                        <span
+                            class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button id="mobile-menu-button"
+                        class="lg:hidden text-gray-500 hover:text-nuclear-green focus:outline-none">
+                        <i class="bi bi-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bg-gray-100 hidden lg:flex border-t border-gray-200">
+            <div class="max-w-7xl mx-auto flex space-x-8 h-12 items-center text-sm font-medium">
+                <a href="home.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Home</a>
+                <a href="products.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Products</a>
+                <a href="articles.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-nuclear-green pb-1 font-semibold">Articles</a>
+                <a href="yield_prediction.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Yield Prediction</a>
+                <a href="faq.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Q&A</a>
+                <!-- <a href="#" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">About</a>
+                <a href="#" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Contact us</a>
+            -->
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 bg-gray-100">Products</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Articles</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Yield
+                    Prediction</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact
+                    us</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-3">The NuclearSeed Catalog</h1>
+        <p class="text-xl text-gray-600 mb-8">Browse our advanced, mutation-bred seeds, fertilizers, and agricultural
+            solutions.</p>
+
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+
+            <div class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-xl shadow-lg sticky-filters">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex justify-between items-center">
+                        Filters
+                        <button class="text-sm text-nuclear-green font-semibold hover:text-green-700">Clear All</button>
+                    </h3>
+
+                    <div class="border-b border-gray-200 pb-4 mb-4">
+                        <h4 class="font-semibold text-lg mb-2">Product Category</h4>
+                        <div class="space-y-2 text-gray-700">
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Nuclear Seeds (12)
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Fertilizer Solutions (8)
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Pest/Disease Control (4)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-200 pb-4 mb-4">
+                        <h4 class="font-semibold text-lg mb-2">Key Resilience Attribute</h4>
+                        <div class="space-y-2 text-gray-700">
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Drought Tolerance
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Disease Resistance
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                High Protein/Nutrient Content
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox"
+                                    class="h-4 w-4 text-nuclear-green border-gray-300 rounded focus:ring-nuclear-green mr-2">
+                                Salinity Tolerance
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-200 pb-4 mb-4">
+                        <h4 class="font-semibold text-lg mb-2">Recommended Climate</h4>
+                        <select
+                            class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-nuclear-green focus:border-nuclear-green text-gray-700">
+                            <option>All Zones</option>
+                            <option>Tropical/Monsoon</option>
+                            <option>Arid/Desert</option>
+                            <option>Temperate</option>
+                        </select>
+                    </div>
+
+                    <div class="pb-4">
+                        <h4 class="font-semibold text-lg mb-2">Price Range</h4>
+                        <input type="range" min="10" max="200" value="150"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg">
+                        <div class="flex justify-between text-sm text-gray-600 mt-2">
+                            <span>$10</span>
+                            <span>$150+</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 mt-10 lg:mt-0">
+
+                <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-md">
+                    <p class="text-gray-700 font-medium">Showing 1 to 12 of 24 Products</p>
+                    <div class="flex items-center space-x-3">
+                        <label for="sort" class="text-gray-600 text-sm hidden sm:block">Sort by:</label>
+                        <select id="sort"
+                            class="py-2 px-3 border border-gray-300 rounded-md bg-white text-gray-700 text-sm focus:ring-nuclear-green focus:border-nuclear-green">
+                            <option>Bestsellers</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                            <option>Highest Yield Prediction</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+                    <div
+                        class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition duration-300 hover:shadow-xl">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHbz1CKoRM9WCX1ShOh_yMrizSw2T6tNwTlCfDvPvw9bFTzc5y2DNwmWOb8yU6hCKMDbA&usqp=CAU" alt="Gamma-Ray Wheat"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span
+                                class="text-xs font-medium text-nuclear-green bg-green-100 px-2 py-1 rounded-full">Seeds</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2 mb-1">Gamma-Ray Wheat (GRW-45)</h4>
+                            <p class="text-gray-500 text-sm mb-3">This gamma mutation-bred rice is high-yield, disease-resistant, and fast-growing, suitable for lowland and upland areas across Myanmar, including Ayeyarwady Delta, Bago, Shan, and Magway. It thrives in loamy to silty soils.see more....</p>
+
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <span class="flex items-center"><i class="bi bi-droplet-half text-blue-500 mr-1"></i>
+                                    Low Water</span>
+                                <span class="flex items-center"><i
+                                        class="bi bi-graph-up-arrow text-nuclear-green mr-1"></i> High Yield</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-3">
+                                <span class="text-xl font-extrabold text-gray-900">2k MMk/kg</span>
+                                <button
+                                    class="bg-nuclear-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-150">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition duration-300 hover:shadow-xl">
+                        <img src="https://i.ebayimg.com/images/g/cAMAAOSwR8heH7kX/s-l1600.webp" alt="Seeds"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span
+                                class="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Seeds</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2 mb-1">Radiator Charlie's Mortgage Lifter Tomato</h4>
+                            <p class="text-gray-500 text-sm mb-3">Sweet 100 Cherry Tomatoes, one of the most popular and prolific cherry tomato varieties. They are known for their sweet flavor and heavy yields. They are an indeterminate variety, meaning the vines will grow and produce fruit continuously until the first hard frost</p>
+
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <span class="flex items-center"><i class="bi bi-flask text-purple-500 mr-1"></i>
+                                    Nano-Nutrients</span>
+                                <span class="flex items-center"><i class="bi bi-sun text-yellow-500 mr-1"></i> Tropical
+                                    Zone</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-3">
+                                <span class="text-xl font-extrabold text-gray-900">12k MMk/ea</span>
+                                <button
+                                    class="bg-nuclear-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-150">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition duration-300 hover:shadow-xl">
+                        <img src="https://www.chilemojo.com.au/cdn/shop/products/see888cre_5000x.jpg?v=1570096290" alt="photo"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs font-medium text-red-600 bg-red-100 px-2 py-1 rounded-full">Seeds</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2 mb-1">Chile Carolina Reaper</h4>
+                            <p class="text-gray-500 text-sm mb-3">Grow Carolina Reaper Chili Peppers
+ong, very hot growing season, which dictates both how and where it must be cultivated. Due to its need for an extended period of warmth, it must be started indoors 10–12 weeks before the last frost on a heat</p>
+
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <span class="flex items-center"><i class="bi bi-leaf text-green-700 mr-1"></i> Organic
+                                    Base</span>
+                                <span class="flex items-center"><i class="bi bi-clock-history text-gray-500 mr-1"></i>
+                                    Fast Action</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-3">
+                                <span class="text-xl font-extrabold text-gray-900">28k MMk/unit</span>
+                                <button
+                                    class="bg-nuclear-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-150">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition duration-300 hover:shadow-xl">
+                        <img src="https://www.mdpi.com/horticulturae/horticulturae-10-00444/article_deploy/html/images/horticulturae-10-00444-g007.png" alt="Placeholder Product"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span
+                                class="text-xs font-medium text-nuclear-green bg-green-100 px-2 py-1 rounded-full">Seeds</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2 mb-1">Gamma mutation-bred Banana</h4>
+                            <p class="text-gray-500 text-sm mb-3">This gamma mutation-bred banana is disease-resistant, fast-growing, and high-yield, suitable for commercial and smallholder farms in Myanmar. It thrives in warm, tropical to subtropical regions like Yangon, Mon, Shan, and Ayeyarwady Delta, with loamy soil, good drainage, and 26–32°C temperatures. Tissue culture plantlets cost Ks 1,500–3,500 each, with bulk farm prices Ks 700–1,200 per plant, and can produce 20–28 kg per bunch.</p>
+
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <span class="flex items-center"><i class="bi bi-clipboard-data text-blue-500 mr-1"></i>
+                                    Data Verified</span>
+                                <span class="flex items-center"><i
+                                        class="bi bi-lightning-charge text-yellow-600 mr-1"></i> Fast Cycle</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-3">
+                                <span class="text-xl font-extrabold text-gray-900">3500MMk/each</span>
+                                <button
+                                    class="bg-nuclear-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-150">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition duration-300 hover:shadow-xl">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiMYtTP_Jd2RBSiHZ91IABXp31e_Wqn19hu7oVoHqjC3756-cDezXFDCe-O86J7cwRSdU&usqp=CAU" alt="Gamma-Ray Wheat"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span
+                                class="text-xs font-medium text-nuclear-green bg-green-100 px-2 py-1 rounded-full">Seeds</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2 mb-1">Mutation-bred Groundnut</h4>
+                            <p class="text-gray-500 text-sm mb-3">This gamma mutation-bred groundnut is drought-tolerant, disease-resistant, and high in oil content, ideal for dry zones and upland regions of Myanmar such as Magway, Mandalay, and Sagaing. It grows best in well-drained sandy-loam soils with temperatures 25–35°C and rainfall 600–1,200 mm. Seeds cost Ks 2,500–4,000 per packet and Ks 1,200–2,000 per kg for bulk, producing 1.5–3 tons per hectare, making it valuable for local consumption, oil production, and export.</p>
+
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <span class="flex items-center"><i class="bi bi-droplet-half text-blue-500 mr-1"></i>
+                                    Low Water</span>
+                                <span class="flex items-center"><i
+                                        class="bi bi-graph-up-arrow text-nuclear-green mr-1"></i> High Yield</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-3">
+                                <span class="text-xl font-extrabold text-gray-900">2k MMk/kg</span>
+                                <button
+                                    class="bg-nuclear-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-150">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-10 flex justify-center">
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <a href="#"
+                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Previous</span>
+                            <i class="bi bi-chevron-left h-5 w-5"></i>
+                        </a>
+                        <a href="#" aria-current="page"
+                            class="z-10 bg-nuclear-green border-nuclear-green text-white relative inline-flex items-center px-4 py-2 text-sm font-medium">1</a>
+                        <a href="#"
+                            class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 text-sm font-medium">2</a>
+                        <a href="#"
+                            class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 text-sm font-medium">3</a>
+                        <a href="#"
+                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Next</span>
+                            <i class="bi bi-chevron-right h-5 w-5"></i>
+                        </a>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">NuclearSeeding</h4>
+                    <p class="text-sm text-gray-400">Agricultural revolution powered by science.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-nuclear-green">Shop</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Nuclear Seeds</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Fertilizers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Sale Items</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-nuclear-green">Information</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Yield Prediction Login</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Research Articles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-nuclear-green">Follow Us</h4>
+                    <div class="flex space-x-4 text-xl">
+                        <a href="#" class="text-gray-400 hover:text-nuclear-green"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-nuclear-green"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-nuclear-green"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-400">&copy; 2025 NuclearSeeding. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+
+</html>

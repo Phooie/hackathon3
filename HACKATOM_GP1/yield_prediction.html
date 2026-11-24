@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yield Prediction Console | NuclearSeeding AYPC</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        /* Consistent brand colors */
+        .bg-nuclear-green {
+            background-color: #28a745;
+        }
+        .text-nuclear-green {
+            color: #28a745;
+        }
+        
+        /* Custom styles for your form area (adapted from your CSS) */
+        .form-container {
+            width: 100%;
+            max-width: 480px;
+        }
+        
+        /* Your original result box styles adapted for Tailwind */
+        #resultBox {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ecf8ff;
+            border-left: 5px solid #007BFF;
+            font-size: 16px;
+            display: none;
+            line-height: 1.6;
+            border-radius: 6px;
+        }
+
+        .value {
+            font-weight: bold;
+            color: #0b4f8a;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <header class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center">
+                    <i class="bi bi-radioactive text-3xl text-nuclear-green mr-2"></i>
+                    <span class="text-3xl font-extrabold text-gray-900">NuclearSeeding</span>
+                </a>
+                
+                <div class="hidden lg:block flex-grow max-w-lg mx-10">
+                    <input type="search" placeholder="Query Model Parameters..." 
+                           class="w-full py-2 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuclear-green">
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-nuclear-green transition duration-150">
+                        <i class="bi bi-person text-2xl"></i>
+                    </a>
+                    <a href="products.html" class="text-gray-600 hover:text-nuclear-green transition duration-150 relative">
+                        <i class="bi bi-bag text-2xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button id="mobile-menu-button" class="lg:hidden text-gray-500 hover:text-nuclear-green focus:outline-none">
+                        <i class="bi bi-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="bg-gray-100 hidden lg:flex border-t border-gray-200">
+            <div class="max-w-7xl mx-auto flex space-x-8 h-12 items-center text-sm font-medium">
+                <a href="index.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Home</a>
+                <a href="products.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Products</a>
+                <a href="articles.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Articles</a>
+                <a href="yield_prediction.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-nuclear-green pb-1 font-semibold">Yield Prediction</a>
+                <a href="faq.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Q&A</a>
+                <a href="about.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">About</a>
+                <a href="contact.html" class="text-gray-800 hover:text-nuclear-green transition duration-150 border-b-2 border-transparent hover:border-nuclear-green pb-1">Contact us</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex justify-center">
+        
+        <div class="bg-white p-6 rounded-xl shadow-2xl form-container border-t-4 border-nuclear-green">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center justify-center">
+                <i class="bi bi-graph-up-arrow text-nuclear-green mr-2"></i> Nuclear Seed Yield Predictor
+            </h2>
+
+            <label class="font-semibold text-lg mb-2 block">Crop</label>
+            <select id="crop" class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-blue-500 focus:border-blue-500 text-gray-700"></select>
+
+            <label class="font-semibold text-lg mb-2 block">Radiation Type</label>
+            <select id="radiation" class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-blue-500 focus:border-blue-500 text-gray-700"></select>
+
+            <label class="font-semibold text-lg mb-2 block">Dose (Gy)</label>
+            <input type="number" id="dose" step="0.1" value="120" class="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:ring-blue-500 focus:border-blue-500">
+
+            <label class="font-semibold text-lg mb-2 block">Mutation Trait</label>
+            <select id="trait" class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-blue-500 focus:border-blue-500 text-gray-700"></select>
+
+            <label class="font-semibold text-lg mb-2 block">Location</label>
+            <select id="location" class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-blue-500 focus:border-blue-500 text-gray-700"></select>
+
+            <label class="font-semibold text-lg mb-2 block">Soil Type</label>
+            <select id="soil" class="w-full py-2 px-3 border border-gray-300 rounded-md bg-white focus:ring-blue-500 focus:border-blue-500 text-gray-700"></select>
+
+            <label class="font-semibold text-lg mb-2 block">Average Temperature (°C)</label>
+            <input type="number" id="temp" step="0.1" value="28.0" class="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:ring-blue-500 focus:border-blue-500">
+
+            <label class="font-semibold text-lg mb-2 block">Rainfall (mm)</label>
+            <input type="number" id="rain" step="0.1" value="1000.0" class="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:ring-blue-500 focus:border-blue-500">
+
+            <label class="font-semibold text-lg mb-2 block">Growth Days</label>
+            <input type="number" id="days" value="100" class="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:ring-blue-500 focus:border-blue-500">
+
+            <button onclick="predictYield()" class="w-full bg-nuclear-green text-white font-bold py-3 rounded-lg text-lg hover:bg-green-700 transition duration-150 flex items-center justify-center shadow-lg">
+                <i class="bi bi-play-circle-fill mr-2"></i> PREDICT YIELD
+            </button>
+
+            <div id="resultBox"></div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-400">&copy; 2025 NuclearSeeding. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+// --- Load dropdown values from backend automatically ---
+// Fetch data from Flask /data endpoint
+fetch("http://127.0.0.1:5000/data")
+    .then(res => res.json())
+    .then(data => {
+        // Map the API keys to the correct HTML dropdown IDs
+        fillDropdown("crop", data.Crop);
+        fillDropdown("radiation", data.Radiation_Type);
+        fillDropdown("trait", data.Mutation_Trait);
+        fillDropdown("location", data.Location);
+        fillDropdown("soil", data.Soil_Type);
+    })
+    .catch(error => {
+        console.error("Error loading data for dropdowns:", error);
+        alert("Failed to connect to Flask server. Please check the console.");
+    });
+
+function fillDropdown(id, values) {
+    const select = document.getElementById(id);
+    // Add a default "Select..." option
+    const defaultOpt = document.createElement("option");
+    defaultOpt.textContent = `Select ${id.charAt(0).toUpperCase() + id.slice(1)}...`;
+    defaultOpt.value = "";
+    defaultOpt.disabled = true;
+    defaultOpt.selected = true;
+    select.appendChild(defaultOpt);
+
+    // Populate with actual data
+    values.forEach(v => {
+        const opt = document.createElement("option");
+        opt.textContent = v;
+        opt.value = v;
+        select.appendChild(opt);
+    });
+}
+
+// --- Prediction function ---
+function predictYield() {
+    // Validate required fields (simplified check)
+    const requiredFields = ["crop", "radiation", "trait", "location", "soil", "dose", "temp", "rain", "days"];
+    let isValid = true;
+    
+    for (const id of requiredFields) {
+        const element = document.getElementById(id);
+        if (!element.value || element.value === "") {
+            element.style.borderColor = 'red';
+            isValid = false;
+        } else {
+            element.style.borderColor = '#bbb';
+        }
+    }
+    
+    if (!isValid) {
+        document.getElementById("resultBox").style.display = "block";
+        document.getElementById("resultBox").innerHTML = `<span style="color:red;font-weight:bold;">Please fill out all fields before predicting.</span>`;
+        return;
+    }
+
+
+    const payload = {
+        // Dropdown values
+        Crop: document.getElementById("crop").value,
+        Radiation_Type: document.getElementById("radiation").value,
+        Mutation_Trait: document.getElementById("trait").value,
+        Location: document.getElementById("location").value,
+        Soil_Type: document.getElementById("soil").value,
+        
+        // Numeric values (must match the Flask /predict endpoint keys)
+        Dose_Gy: parseFloat(document.getElementById("dose").value),
+        Avg_Temp_C: parseFloat(document.getElementById("temp").value),
+        Rainfall_mm: parseFloat(document.getElementById("rain").value),
+        Growth_Days: parseInt(document.getElementById("days").value)
+    };
+    
+    // Temporarily disable button and indicate loading
+    const button = document.querySelector('button');
+    const originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<i class="bi bi-arrow-repeat mr-2 animate-spin"></i> CALCULATING...';
+
+
+    fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("resultBox").style.display = "block";
+        
+        if (data.error) {
+             document.getElementById("resultBox").innerHTML = `<span style="color:red;font-weight:bold;">ERROR: ${data.error}</span>`;
+             return;
+        }
+
+        // Display results
+        document.getElementById("resultBox").innerHTML = `
+            🌱 <b>Prediction Results</b><br><br>
+            ➤ Predicted Yield: <span class="value">${data.Predicted_Yield_kg_per_acre.toFixed(2)} kg/acre</span><br>
+            ➤ Model Confidence: <span class="value">${(data.Model_Accuracy_R2*100).toFixed(2)}%</span><br>
+        `;
+    })
+    .catch(error => {
+        document.getElementById("resultBox").innerHTML = `<span style="color:red;font-weight:bold;">Error fetching prediction. Check Flask server status (is it running?).</span>`;
+        console.error(error);
+    })
+    .finally(() => {
+        // Restore button state
+        button.disabled = false;
+        button.innerHTML = originalText;
+    });
+}
+</script>
+
+</body>
+</html>
